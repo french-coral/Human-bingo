@@ -2,8 +2,10 @@ import json
 import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
 
+
 class PropositionEditor(ttk.Frame):
     """Two synchronized ways to edit the proposition list."""
+
     def __init__(self, parent, onChanged):
         super().__init__(parent)
         self.onChanged = onChanged
@@ -250,4 +252,4 @@ class PropositionEditor(ttk.Frame):
                 ensure_ascii=False,
                 indent=4,
             )
-            file.write("\\n")
+            file.write("\n")

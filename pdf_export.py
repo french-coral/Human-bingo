@@ -7,8 +7,10 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.lib import colors
 from reportlab.pdfbase.pdfmetrics import stringWidth
 
+
 class BingoPdfRenderer:
     """Draw a Human Bingo page using the same layout used by the preview."""
+
     margin = 42
     cornerRadius = 8
     gridLineWidth = 0.8

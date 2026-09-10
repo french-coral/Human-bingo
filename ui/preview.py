@@ -2,8 +2,10 @@ import tkinter as tk
 
 from reportlab.pdfgen import canvas
 
+
 class PreviewRenderer:
-    """ReportLab page to a Tkinter PhotoImage using Pillow."""
+    """Render a ReportLab page to a Tkinter PhotoImage using Pillow."""
+
     def __init__(self, pdfRenderer):
         self.pdfRenderer = pdfRenderer
         self.currentImage = None

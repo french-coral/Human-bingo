@@ -9,8 +9,10 @@ from pdf_export import BingoPdfRenderer
 from ui.editor import PropositionEditor
 from ui.preview import PreviewRenderer
 
+
 class HumanBingoApp:
     """Main Tkinter application."""
+
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Human Bingo Generator")
@@ -319,8 +321,8 @@ class HumanBingoApp:
                 20,
                 anchor="nw",
                 text=(
-                    "Preview unavailable.\\n\\n"
-                    f"{error}\\n\\n"
+                    "Preview unavailable.\n\n"
+                    f"{error}\n\n"
                     "The PDF export remains available."
                 ),
             )
@@ -409,7 +411,7 @@ class HumanBingoApp:
                     ensure_ascii=False,
                     indent=4,
                 )
-                file.write("\\n")
+                file.write("\n")
 
             messagebox.showinfo(
                 "Batch saved",

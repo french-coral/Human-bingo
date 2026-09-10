@@ -1,8 +1,10 @@
 import random
 from collections import Counter
 
+
 class BingoGenerator:
     """Generate Human Bingo grids from a list of proposition strings."""
+
     def __init__(self, propositions):
         self.propositions = [
             proposition.strip()
