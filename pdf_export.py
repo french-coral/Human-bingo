@@ -54,6 +54,7 @@ class BingoPdfRenderer:
         targetCanvas,
         grid,
         title,
+        subTitle,
         orientation,
         seed,
         outputWidth=None,
@@ -76,6 +77,7 @@ class BingoPdfRenderer:
             targetCanvas,
             grid,
             title,
+            subTitle,
             seed,
             pageWidth,
             pageHeight,
@@ -83,7 +85,7 @@ class BingoPdfRenderer:
 
         targetCanvas.restoreState()
 
-    def _drawPage(self, targetCanvas, grid, title, seed, pageWidth, pageHeight):
+    def _drawPage(self, targetCanvas, grid, title, subTitle, seed, pageWidth, pageHeight):
         gridSize = int(len(grid) ** 0.5)
         titleY = pageHeight - self.margin
         subtitleY = titleY - 27
@@ -96,7 +98,7 @@ class BingoPdfRenderer:
         targetCanvas.drawString(
             self.margin,
             subtitleY,
-            "Find someone who:",
+            subTitle,
         )
 
         gridTop = subtitleY - 18
@@ -232,7 +234,7 @@ class BingoPdfRenderer:
 
         return lines or [""]
 
-    def exportBatch(self, grids, title, orientation, seed, outputPath):
+    def exportBatch(self, grids, title, subTitle, orientation, seed, outputPath):
         pageWidth, pageHeight = self.getPageSize(orientation)
         pdfCanvas = canvas.Canvas(str(outputPath), pagesize=(pageWidth, pageHeight))
 
@@ -241,6 +243,7 @@ class BingoPdfRenderer:
                 pdfCanvas,
                 grid,
                 title,
+                subTitle,
                 orientation,
                 seed,
                 pageWidth,

@@ -10,7 +10,7 @@ class PreviewRenderer:
         self.pdfRenderer = pdfRenderer
         self.currentImage = None
 
-    def render(self, parent, grid, title, orientation, seed):
+    def render(self, parent, grid, title, subTitle, orientation, seed):
         # Import here so the main application can still start if Pillow is
         # temporarily unavailable while the rest of the UI is being tested.
         from PIL import Image, ImageTk
@@ -44,6 +44,7 @@ class PreviewRenderer:
                 pdfCanvas,
                 grid,
                 title,
+                subTitle,
                 orientation,
                 seed,
                 pageWidth,

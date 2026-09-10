@@ -16,7 +16,7 @@ class HumanBingoApp:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Human Bingo Generator")
-        self.root.geometry("1180x760")
+        self.root.geometry("1480x760")
         self.root.minsize(950, 650)
 
         self.pdfRenderer = BingoPdfRenderer()
@@ -27,6 +27,7 @@ class HumanBingoApp:
         self.loadedJsonPath = None
 
         self.titleVariable = tk.StringVar(value="Human Bingo")
+        self.subTitleVariable = tk.StringVar(value="Trouve quelqu'un qui ...")
         self.gridSizeVariable = tk.IntVar(value=5)
         self.batchSizeVariable = tk.IntVar(value=10)
         self.seedVariable = tk.IntVar(value=random.randint(100000, 999999))
@@ -89,58 +90,65 @@ class HumanBingoApp:
             width=28,
         ).grid(row=0, column=1, padx=(5, 15), sticky="ew")
 
-        ttk.Label(controls, text="Grid size:").grid(row=0, column=2, sticky="w")
+        ttk.Label(controls, text="SubTitle:").grid(row=0, column=2, sticky="w")
+        ttk.Entry(
+            controls,
+            textvariable=self.subTitleVariable,
+            width=28,
+        ).grid(row=0, column=3, padx=(5, 15), sticky="ew")
+
+        ttk.Label(controls, text="Grid size:").grid(row=0, column=4, sticky="w")
         ttk.Spinbox(
             controls,
             from_=1,
             to=50,
             textvariable=self.gridSizeVariable,
             width=6,
-        ).grid(row=0, column=3, padx=(5, 15))
+        ).grid(row=0, column=5, padx=(5, 15))
 
-        ttk.Label(controls, text="Number of grids:").grid(row=0, column=4, sticky="w")
+        ttk.Label(controls, text="Number of grids:").grid(row=0, column=6, sticky="w")
         ttk.Spinbox(
             controls,
             from_=1,
             to=1000,
             textvariable=self.batchSizeVariable,
             width=7,
-        ).grid(row=0, column=5, padx=(5, 15))
+        ).grid(row=0, column=7, padx=(5, 15))
 
-        ttk.Label(controls, text="Seed:").grid(row=0, column=6, sticky="w")
+        ttk.Label(controls, text="Seed:").grid(row=0, column=8, sticky="w")
         ttk.Entry(
             controls,
             textvariable=self.seedVariable,
             width=10,
-        ).grid(row=0, column=7, padx=(5, 5))
+        ).grid(row=0, column=9, padx=(5, 5))
 
         ttk.Button(
             controls,
             text="Randomize",
             command=self.randomizeSeed,
-        ).grid(row=0, column=8, padx=(0, 15))
+        ).grid(row=0, column=10, padx=(0, 15))
 
-        ttk.Label(controls, text="Orientation:").grid(row=0, column=9, sticky="w")
+        ttk.Label(controls, text="Orientation:").grid(row=0, column=11, sticky="w")
 
         ttk.Radiobutton(
             controls,
             text="Portrait",
             variable=self.orientationVariable,
             value="portrait",
-        ).grid(row=0, column=10, padx=3)
+        ).grid(row=0, column=12, padx=3)
 
         ttk.Radiobutton(
             controls,
             text="Landscape",
             variable=self.orientationVariable,
             value="landscape",
-        ).grid(row=0, column=11, padx=3)
+        ).grid(row=0, column=13, padx=3)
 
         ttk.Button(
             controls,
             text="Generate",
             command=self.generate,
-        ).grid(row=0, column=12, padx=(15, 3))
+        ).grid(row=0, column=14, padx=(15, 3))
 
         self.saveBatchButton = ttk.Button(
             controls,
@@ -148,7 +156,7 @@ class HumanBingoApp:
             command=self.saveBatch,
             state="disabled",
         )
-        self.saveBatchButton.grid(row=0, column=13, padx=3)
+        self.saveBatchButton.grid(row=0, column=15, padx=3)
 
         self.exportPdfButton = ttk.Button(
             controls,
@@ -156,7 +164,7 @@ class HumanBingoApp:
             command=self.exportPdf,
             state="disabled",
         )
-        self.exportPdfButton.grid(row=0, column=14, padx=3)
+        self.exportPdfButton.grid(row=0, column=16, padx=3)
 
         controls.columnconfigure(1, weight=1)
 
@@ -293,6 +301,7 @@ class HumanBingoApp:
 
         grid = self.generatedGrids[self.currentGridIndex]
         title = self.titleVariable.get().strip() or "Human Bingo"
+        subTitle = self.subTitleVariable.get().strip() or "Find someone who ..."
         orientation = self.orientationVariable.get()
         seed = self.seedVariable.get()
 
@@ -301,6 +310,7 @@ class HumanBingoApp:
                 self.previewCanvas,
                 grid,
                 title,
+                subTitle,
                 orientation,
                 seed,
             )
@@ -441,6 +451,7 @@ class HumanBingoApp:
             self.pdfRenderer.exportBatch(
                 self.generatedGrids,
                 self.titleVariable.get().strip() or "Human Bingo",
+                self.subTitleVariable.get().strip() or "Trouve quelqu'un qui ...",
                 self.orientationVariable.get(),
                 seed,
                 path,
