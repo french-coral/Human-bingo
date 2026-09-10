@@ -11,7 +11,7 @@ from reportlab.pdfbase.pdfmetrics import stringWidth
 class BingoPdfRenderer:
     """Draw a Human Bingo page using the same layout used by the preview."""
 
-    margin = 42
+    margin = 50
     cornerRadius = 8
     gridLineWidth = 0.8
     nameSpaceRatio = 0.50
@@ -122,9 +122,16 @@ class BingoPdfRenderer:
         targetCanvas.setFont(self.fontRegular, 7)
         targetCanvas.drawRightString(
             pageWidth - self.margin,
-            self.margin - 8,
+            self.margin - 12,
             f"Seed: {seed}",
         )
+
+        targetCanvas.drawString(
+                self.margin,
+                self.margin - 12,
+                f"BDE - Gamesup",
+        )
+        
 
     def _drawGrid(
         self,
