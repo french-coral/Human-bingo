@@ -1,3 +1,7 @@
 BatchTest/
 __pycache__/
 ui/__pycache__/
+.venv
+build
+dist
+HumanBingo.spec
